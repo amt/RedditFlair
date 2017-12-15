@@ -1,4 +1,4 @@
-### Reddit Thing
+### Reddit Flair Analyzer
 * Search a subreddit for a post based on a query.
 * Return information about the flairs of the post authors.
 
@@ -22,6 +22,11 @@ optional arguments:
   -h, --help    show this help message and exit
   -p, --print   Pass this argument to print out detailed data.
   -e, --export  Pass this argument to export data.
+  -t, --title   Pass this argument to include post titles in data.
+  -l LIMIT, --limit LIMIT
+                Number of posts to grab. Default is as many as
+                possible.
 ```
 
 ### Examples
+![alt-text](https://i.imgur.com/iVHx6Lw.png)

@@ -21,11 +21,12 @@ positional arguments:
 optional arguments:
   -h, --help    show this help message and exit
   -p, --print   Pass this argument to print out detailed data.
-  -e, --export  Pass this argument to export data.
   -t, --title   Pass this argument to include post titles in data.
-  -l LIMIT, --limit LIMIT
+  -l AMOUNT, --limit AMOUNT
                 Number of posts to grab. Default is as many as
                 possible.
+  -e FILENAME, --export FILENAME  
+                Filename to export data to.
 ```
 
 ### Examples

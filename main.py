@@ -74,10 +74,12 @@ def print_details(primaryFlairs, secondaryFlairs):
     """
 
     print("Primary flairs:")
+    print("---------------")
     for flair in primaryFlairs.most_common():
         print("{}, {}".format(flair[0], flair[1]))
 
     print("\nSecondary flairs:")
+    print("-----------------")
     for flair in secondaryFlairs.most_common():
         print("{}, {}".format(flair[0], flair[1]))
 
@@ -89,7 +91,7 @@ def print_titles(titles):
         titles: list of post titles with primary and secondary flairs
     """
     print("\"Post Title\", Primary Flair, Secondary Flair")
-    print("-----------------------------------------------")
+    print("--------------------------------------------")
     for t in titles:
         print("{}, {}, {}".format(t[0], t[1], t[2]))
     print('\n')

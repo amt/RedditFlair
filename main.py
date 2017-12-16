@@ -35,14 +35,16 @@ def setup():
         '-p', '--print', action="store_true", default=False,
         help=("Pass this argument to print out detailed data."))
     parser.add_argument(
-        '-e', '--export', action="store_true", default=False,
-        help=("Pass this argument to export data."))
-    parser.add_argument(
         '-t', '--title', action="store_true", default=False,
         help=("Pass this argument to include post titles in data."))
     parser.add_argument(
         '-l', '--limit', action="store", type=int, default=None,
+        metavar='AMOUNT',
         help=("Number of posts to grab. Default is as many as possible."))
+    parser.add_argument(
+        '-e', '--export', action="store", type=str, default=None,
+        metavar='FILENAME',
+        help=("Filename to export data to."))
     return parser.parse_args()
 
 
@@ -92,27 +94,50 @@ def print_titles(titles):
         print("{}, {}, {}".format(t[0], t[1], t[2]))
     print('\n')
 
-def export_data():
-    return 0
+
+def export_data(numberResults, titles, primaryFlairs, secondaryFlairs, args):
+    """
+    Print data to filename
+    ARGS:
+        numberResults: total number of posts
+        titles: list of titles
+        primaryFlairs: list of primaryFlairs
+        secondaryFlairs: list of secondaryFlairs
+        args: args from command line to check filename and what data to output
+    """
+    stdout = sys.stdout
+
+    f = open(args.export, 'w')
+    sys.stdout = f
+
+    print("Number of results: {}\n".format(numberResults))
+
+    if args.title:
+        print_titles(titles)
+
+    print_details(primaryFlairs, secondaryFlairs)
+
+    sys.stdout = stdout
+    f.close()
 
 
 def main():
     """ MAIN """
 
-    arg = setup()
+    args = setup()
 
     reddit = praw.Reddit()
 
-    sub_exists(reddit, arg.subreddit)
+    sub_exists(reddit, args.subreddit)
 
-    subreddit = reddit.subreddit(arg.subreddit)
+    subreddit = reddit.subreddit(args.subreddit)
 
     primaryFlairs = Counter()
     secondaryFlairs = Counter()
     titles = []
     numberResults = 0
 
-    for submission in subreddit.search(arg.query, sort='new', limit=arg.limit):
+    for submission in subreddit.search(args.query, sort='new', limit=args.limit):
         # Split flair in to primary and secondary flair
         # On /r/CFB they are separated by a /
         # Some flairs contain /r/ so use ' / '
@@ -131,14 +156,14 @@ def main():
 
     print("Number of results: {}\n".format(numberResults))
 
-    if arg.title:
+    if args.title:
         print_titles(titles)
 
-    if arg.print:
+    if args.print:
         print_details(primaryFlairs, secondaryFlairs)
-    
-    if arg.export:
-        export_data()
+
+    if args.export:
+        export_data(numberResults, titles, primaryFlairs, secondaryFlairs, args)
 
 
 if __name__ == '__main__':

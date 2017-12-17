@@ -1,11 +1,10 @@
 """
-Reddit Search Thing
+Reddit Flair Analyzer
 Anthony Torres
 torresam@umich.edu
 """
 # !/usr/bin/env python3
 
-# pip install praw --user
 # pylint: disable=C0103
 # https://www.reddit.com/wiki/search
 

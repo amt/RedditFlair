@@ -4,7 +4,7 @@
 
 ### Installation
 ```
-Uses python 3.6
+Uses Python 3.5.2+
 1. Head over to https://www.reddit.com/prefs/apps and get CLIENT_ID and CLIENT_SECRET
 2. Put the CLIENT_ID and CLIENT_SECRET in their respective fields in the praw.ini file
 3. pip install praw --user

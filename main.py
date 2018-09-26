@@ -14,7 +14,7 @@ import argparse
 import sys
 import praw
 from prawcore import NotFound
-
+from pprint import pprint
 
 def setup():
     """
@@ -140,9 +140,11 @@ def main():
 
     for submission in subreddit.search(args.query, sort='new', limit=args.limit):
         # Split flair in to primary and secondary flair
-        # On /r/CFB they are separated by a /
-        # Some flairs contain /r/ so use ' / '
-        formattedFlair = str(submission.author_flair_text).split(' / ', 1)
+        # On /r/CFB they are separated by a •
+        # Example flair text:
+        # ':centralmichigan: :michigan: Central Michigan • Michigan'
+        formattedFlair = str(submission.author_flair_text).split(': ')[-1]
+        formattedFlair = formattedFlair.split(' • ')
         formattedTitle = "\"{}\"".format(submission.title)
 
         titles.append([formattedTitle, formattedFlair[0], formattedFlair[-1]])

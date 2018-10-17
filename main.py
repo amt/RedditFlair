@@ -16,6 +16,20 @@ import praw
 from prawcore import NotFound
 from pprint import pprint
 
+import matplotlib.pyplot as plt
+import numpy
+import pandas
+
+def make_graph(primaryFlairs, secondaryFlairs):
+    keys, counts = zip(*primaryFlairs.most_common())
+    y_pos = numpy.arange(len(keys))
+    plt.figure(figsize=(20,10))
+    plt.barh(y_pos, counts, height=0.5)
+    plt.yticks(y_pos, keys)
+    plt.xlabel('Counts per key')
+    plt.title('FLAIRS OF REDDIT USERS')
+    plt.savefig("image.png", bbox_inches='tight', dpi=100)
+
 def setup():
     """
     Parse command line arguments
@@ -158,7 +172,7 @@ def main():
         numberResults += 1
 
     print("Number of results: {}\n".format(numberResults))
-
+    make_graph(primaryFlairs, secondaryFlairs)
     if args.title:
         print_titles(titles)
 

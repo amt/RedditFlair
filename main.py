@@ -16,6 +16,11 @@ import praw
 from prawcore import NotFound
 from pprint import pprint
 
+import matplotlib.pyplot as plt
+import numpy
+import pandas
+
+
 def setup():
     """
     Parse command line arguments
@@ -44,6 +49,10 @@ def setup():
         '-e', '--export', action="store", type=str, default=None,
         metavar='FILENAME',
         help=("Filename to export data to."))
+    parser.add_argument(
+        '-g', '--graph', action="store", type=str,
+        help=("Export a graph of the data.")
+    )
     return parser.parse_args()
 
 
@@ -122,6 +131,23 @@ def export_data(numberResults, titles, primaryFlairs, secondaryFlairs, args):
     f.close()
 
 
+def make_graph(primaryFlairs, filename):
+    """
+    Make a visual graph of the primary flair data.
+    ARGS:
+        primaryFlairs: list of primaryFlairs
+        filename: name of output file from command line args
+    """
+    keys, counts = zip(*primaryFlairs.most_common())
+    y_pos = numpy.arange(len(keys))
+    plt.figure(figsize=(20,10))
+    plt.barh(y_pos, counts, height=0.5)
+    plt.yticks(y_pos, keys)
+    plt.xlabel('Flair Count')
+    plt.title('FLAIRS OF REDDIT USERS')
+    plt.savefig(filename, bbox_inches='tight', dpi=100)
+
+
 def main():
     """ MAIN """
 
@@ -167,6 +193,9 @@ def main():
 
     if args.export:
         export_data(numberResults, titles, primaryFlairs, secondaryFlairs, args)
+
+    if args.graph:
+        make_graph(primaryFlairs, args.graph)
 
 
 if __name__ == '__main__':

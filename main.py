@@ -5,17 +5,11 @@ torresam@umich.edu
 """
 # !/usr/bin/env python3
 
-# pylint: disable=C0103
-# https://www.reddit.com/wiki/search
-
-from __future__ import print_function
 from collections import Counter
 import argparse
 import sys
 import praw
 from prawcore import NotFound
-from pprint import pprint
-
 import matplotlib.pyplot as plt
 import numpy
 import pandas
@@ -51,6 +45,7 @@ def setup():
         help=("Filename to export data to."))
     parser.add_argument(
         '-g', '--graph', action="store", type=str,
+        metavar='FILENAME',
         help=("Export a graph of the data.")
     )
     return parser.parse_args()
@@ -183,7 +178,7 @@ def main():
 
         numberResults += 1
 
-    print("Number of results: {}\n".format(numberResults))
+    print("Number of results: {}".format(numberResults))
 
     if args.title:
         print_titles(titles)

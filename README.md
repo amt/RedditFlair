@@ -7,7 +7,7 @@
 Uses Python 3.5.2+
 1. Head over to https://www.reddit.com/prefs/apps and get CLIENT_ID and CLIENT_SECRET
 2. Put the CLIENT_ID and CLIENT_SECRET in their respective fields in the praw.ini file
-3. pip install praw --user
+3. pip install -r requirements.txt
 ```
 ### Usage
 ```
@@ -25,8 +25,10 @@ optional arguments:
   -l AMOUNT, --limit AMOUNT
                 Number of posts to grab. Default is as many as
                 possible.
-  -e FILENAME, --export FILENAME  
+  -e FILENAME, --export FILENAME
                 Filename to export data to.
+  -g FILENAME, --graph FILENAME
+                Export a graph of the data.
 ```
 
 ### Examples

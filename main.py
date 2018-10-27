@@ -12,7 +12,6 @@ import praw
 from prawcore import NotFound
 import matplotlib.pyplot as plt
 import numpy
-import pandas
 
 
 def setup():
@@ -133,10 +132,10 @@ def make_graph(primaryFlairs, filename):
         primaryFlairs: list of primaryFlairs
         filename: name of output file from command line args
     """
-    keys, counts = zip(*primaryFlairs.most_common())
+    keys, counts = zip(*primaryFlairs.most_common(10))
     y_pos = numpy.arange(len(keys))
     plt.figure(figsize=(20,10))
-    plt.barh(y_pos, counts, height=0.5)
+    plt.barh(y_pos, counts)
     plt.yticks(y_pos, keys)
     plt.xlabel('Flair Count')
     plt.title('FLAIRS OF REDDIT USERS')

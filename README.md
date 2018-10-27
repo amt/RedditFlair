@@ -25,8 +25,10 @@ optional arguments:
   -l AMOUNT, --limit AMOUNT
                 Number of posts to grab. Default is as many as
                 possible.
-  -e FILENAME, --export FILENAME  
+  -e FILENAME, --export FILENAME
                 Filename to export data to.
+  -g FILENAME, --graph FILENAME
+                Export a graph of the data.
 ```
 
 ### Examples

@@ -12,7 +12,6 @@ import praw
 from prawcore import NotFound
 import matplotlib.pyplot as plt
 import numpy
-import pandas
 
 
 def setup():

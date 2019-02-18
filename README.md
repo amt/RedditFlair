@@ -32,4 +32,4 @@ optional arguments:
 ```
 
 ### Examples
-![alt-text](https://i.imgur.com/iVHx6Lw.png)
+![alt-text](https://i.imgur.com/4Itqpe0.png)
